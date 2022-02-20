@@ -1,6 +1,6 @@
 import * as Styled from "./styles";
 
-import { TodoList } from "../todoList";
+import { TodoList } from "../TodoList";
 
 const Home = () => {
   return (

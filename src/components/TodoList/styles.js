@@ -6,6 +6,4 @@ export const Container = styled.div`
   max-width: 700px;
   min-height: 400px;
   margin: 0 auto;
-  border: 1px solid white;
-  background-color: red;
 `;

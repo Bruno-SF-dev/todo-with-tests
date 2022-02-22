@@ -27,7 +27,7 @@ describe("Todo List Component", () => {
   });
 
   test("Should add and render new item", () => {
-    const { getByText, getByRole, getByLabelText, queryByText } = render(
+    const { getByRole, getByLabelText, queryByText } = render(
       <ThemeProvider theme={theme}>
         <TodoList />
       </ThemeProvider>,
@@ -40,12 +40,37 @@ describe("Todo List Component", () => {
 
     userEvent.type(newItemInput, "Um novo item.");
     userEvent.click(addBtn);
-    userEvent.clear(newItemInput);
 
     userEvent.type(newItemInput, "Outro novo item.");
     userEvent.click(addBtn);
-    userEvent.clear(newItemInput);
+
+    expect(queryByText("Outro novo item.")).toBeInTheDocument();
+  });
+
+  test("Should only remove the selected item", () => {
+    const { getByRole, getAllByTestId, getByLabelText, queryByText } = render(
+      <ThemeProvider theme={theme}>
+        <TodoList />
+      </ThemeProvider>,
+    );
+
+    const newItemInput = getByLabelText("new-todo-value");
+    const addBtn = getByRole("button", { name: "Adicionar" });
+
+    userEvent.type(newItemInput, "Um novo item.");
+    userEvent.click(addBtn);
+
+    userEvent.type(newItemInput, "Outro novo item.");
+    userEvent.click(addBtn);
 
     expect(queryByText("Um novo item.")).toBeInTheDocument();
+    expect(queryByText("Outro novo item.")).toBeInTheDocument();
+
+    const itemsRender = getAllByTestId("remove-todo-item");
+
+    userEvent.click(itemsRender[1]);
+
+    expect(queryByText("Um novo item.")).toBeInTheDocument();
+    expect(queryByText("Outro novo item.")).not.toBeInTheDocument();
   });
 });

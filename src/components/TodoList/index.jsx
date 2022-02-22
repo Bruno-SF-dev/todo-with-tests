@@ -1,6 +1,8 @@
 import { useState } from "react";
 import * as Styled from "./styles";
 
+const idGenerator = () => Math.floor(Math.random() * (20000 - 10000) + 10000);
+
 const TodoList = () => {
   const [newItemValue, setNewItemValue] = useState("");
   const [listItems, setListItems] = useState([]);
@@ -10,7 +12,20 @@ const TodoList = () => {
   };
 
   const addNewItem = () => {
-    setListItems([...listItems, newItemValue]);
+    setListItems([
+      ...listItems,
+      {
+        id: idGenerator(),
+        value: newItemValue,
+      },
+    ]);
+
+    //clear input
+    setNewItemValue("");
+  };
+
+  const removeItem = (itemId) => {
+    setListItems(listItems.filter((item) => item.id !== itemId));
   };
 
   return (
@@ -22,9 +37,15 @@ const TodoList = () => {
         onChange={handleChange}
       />
       <button onClick={addNewItem}>Adicionar</button>
-      {listItems.map((item, index) => (
-        <li key={index} role="todo-item">
-          {item}
+      {listItems.map((item) => (
+        <li key={item.id} role="todo-item">
+          {item.value}
+          <button
+            onClick={() => removeItem(item.id)}
+            data-testid="remove-todo-item"
+          >
+            Remover
+          </button>
         </li>
       ))}
     </Styled.Container>

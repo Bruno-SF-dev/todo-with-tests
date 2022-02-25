@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   padding: 0;
   border:none;
   box-sizing: border-box;
+  outline: 0;
 }
 
 body, input, textarea, button {

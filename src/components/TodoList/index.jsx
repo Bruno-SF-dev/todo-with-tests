@@ -30,24 +30,30 @@ const TodoList = () => {
 
   return (
     <Styled.Container>
-      <input
-        type="text"
-        aria-label="new-todo-value"
-        value={newItemValue}
-        onChange={handleChange}
-      />
-      <button onClick={addNewItem}>Adicionar</button>
-      {listItems.map((item) => (
-        <li key={item.id} role="todo-item">
-          {item.value}
-          <button
-            onClick={() => removeItem(item.id)}
-            data-testid="remove-todo-item"
-          >
-            Remover
-          </button>
-        </li>
-      ))}
+      <Styled.Form>
+        <input
+          type="text"
+          aria-label="new-todo-value"
+          value={newItemValue}
+          onChange={handleChange}
+        />
+        <button onClick={addNewItem}>Adicionar</button>
+      </Styled.Form>
+      {listItems.length > 0 && (
+        <Styled.TodoItemsContainer>
+          {listItems.map((item) => (
+            <Styled.TodoItem key={item.id} role="todo-item">
+              {item.value}
+              <button
+                onClick={() => removeItem(item.id)}
+                data-testid="remove-todo-item"
+              >
+                Excluir
+              </button>
+            </Styled.TodoItem>
+          ))}
+        </Styled.TodoItemsContainer>
+      )}
     </Styled.Container>
   );
 };

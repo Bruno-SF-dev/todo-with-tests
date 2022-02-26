@@ -20,7 +20,8 @@ export const Form = styled.div`
   }
 
   button {
-    background-color: ${({ theme }) => theme.colors.success};
+    background-color: ${({ theme }) => theme.colors.purple};
+    color: ${({ theme }) => theme.colors.textPrimary};
     padding: 4px 12px;
     border-radius: 0 4px 4px 0;
   }

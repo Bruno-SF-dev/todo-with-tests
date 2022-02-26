@@ -4,6 +4,7 @@ export const theme = {
     darkSecondary: "#555b6e",
     danger: "#FF595E",
     success: "#73FBD3",
+    purple: "#7209b7",
     textPrimary: "#ffffff",
   },
 };
